@@ -30,17 +30,15 @@ def stop_scheduler():
         logger.info("[Scheduler] APScheduler stopped.")
 
 
-def add_job(task_id: str, func, interval_minutes: int, **kwargs) -> str:
-    """
-    Add a recurring job to the scheduler.
-    Returns the APScheduler job ID.
-    """
-    job_id = f"job_{task_id}"
+def add_job(job_task_id: str, func, interval_minutes: int, **kwargs):
+    job_id = f"job_{job_task_id}"
 
-    # Remove existing job if present
-    remove_job(task_id)
+    remove_job(job_task_id)
+
+    kwargs["task_id"] = job_task_id
 
     trigger = IntervalTrigger(minutes=interval_minutes)
+
     scheduler.add_job(
         func,
         trigger=trigger,
@@ -50,8 +48,8 @@ def add_job(task_id: str, func, interval_minutes: int, **kwargs) -> str:
         misfire_grace_time=60,
         coalesce=True,
     )
-    _job_registry[task_id] = job_id
-    logger.info(f"[Scheduler] Job '{job_id}' added, interval={interval_minutes}m")
+
+    _job_registry[job_task_id] = job_id
     return job_id
 
 

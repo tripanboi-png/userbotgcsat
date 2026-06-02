@@ -124,7 +124,7 @@ def register(client, client_manager, name: str = "owner"):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name=name, message=message, all_sessions=False)
+                session_name=name, message=message, all_sessions=False)
 
         await event.edit(
             f"✅ **Auto GCast AKTIF**\n\n"
@@ -165,7 +165,7 @@ def register(client, client_manager, name: str = "owner"):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name="__all__", message=message, all_sessions=True)
+                session_name="__all__", message=message, all_sessions=True)
 
         all_sessions = client_manager.get_all_clients()
         await event.edit(
@@ -215,7 +215,7 @@ def register(client, client_manager, name: str = "owner"):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name=session_name, message=message, all_sessions=False)
+                session_name=session_name, message=message, all_sessions=False)
 
         await event.edit(
             f"✅ **Auto GCast Session AKTIF**\n\n"
@@ -350,7 +350,7 @@ async def restore_autogcast_tasks(client_manager):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name=session_name,
+                session_name=session_name,
                 message=message, all_sessions=all_sessions)
         restored += 1
         logger.info(f"[AutoGcast] Restored task {task_id} for '{session_name}' every {interval}m")
