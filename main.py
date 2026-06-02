@@ -329,13 +329,21 @@ async def main():
     restored = await restore_autogcast_tasks(manager)
     
 
-    logger.info("═" * 50)
-    logger.info("🚀 USERBOT ONLINE")
-    logger.info(f"👤 Owner Session : {manager._owner_name}")
-    logger.info(f"📱 Active Sessions : {len(manager.get_all_clients())}")
-    logger.info(f"🔄 AutoGCast Restored : {restored}")
-    logger.info("⚡ Status : READY")
-    logger.info("═" * 50)
+        logger.info("════════════════════════════════════════════")
+        logger.info("████████╗██████╗ ██╗██████╗  █████╗ ███╗   ██╗")
+        logger.info("╚══██╔══╝██╔══██╗██║██╔══██╗██╔══██╗████╗  ██║")
+        logger.info("   ██║   ██████╔╝██║██████╔╝███████║██╔██╗ ██║")
+        logger.info("   ██║   ██╔══██╗██║██╔═══╝ ██╔══██║██║╚██╗██║")
+        logger.info("   ██║   ██║  ██║██║██║     ██║  ██║██║ ╚████║")
+        logger.info("   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝")
+
+        logger.info("🚀 USERBOT ONLINE 🚀")
+
+        logger.info(f"👤 Owner Session : {manager._owner_name}")
+        logger.info(f"📱 Active Sessions : {len(manager.get_all_clients())}")
+        logger.info(f"🔄 AutoGCast Restored : {restored}")
+        logger.info("⚡ Status : READY")
+        logger.info("════════════════════════════════════════════")
 
     # 8. Handle OS signals for graceful shutdown
     loop = asyncio.get_running_loop()
