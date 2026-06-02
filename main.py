@@ -291,10 +291,9 @@ class ClientManager:
 # ─────────────────────────────────────────────────────────────────────────────
 
 async def main():
-    logger.info("=" * 60)
-    logger.info("  Telegram Userbot Full Management System")
-    logger.info(f"  Started at: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
-    logger.info("=" * 60)
+    logger.info("═" * 50)
+    logger.info("🚀 USERBOT STARTING")
+    logger.info("═" * 50)
 
     # 1. Connect to MongoDB
     try:
@@ -329,6 +328,14 @@ async def main():
     from modules.autogcast import restore_autogcast_tasks
     restored = await restore_autogcast_tasks(manager)
     logger.info(f"[Main] Restored {restored} autogcast task(s) from database.")
+
+    logger.info("═" * 50)
+    logger.info("🚀 USERBOT ONLINE")
+    logger.info(f"👤 Owner Session : {manager._owner_name}")
+    logger.info(f"📱 Active Sessions : {len(manager.get_all_clients())}")
+    logger.info(f"🔄 AutoGCast Restored : {restored}")
+    logger.info("⚡ Status : READY")
+    logger.info("═" * 50)
 
     # 8. Handle OS signals for graceful shutdown
     loop = asyncio.get_running_loop()
