@@ -23,7 +23,7 @@ def register(client, name: str = "owner"):
         msg = await event.edit("🏓 Pong!")
         elapsed = (time.monotonic() - start) * 1000
         await event.edit(f"🏓 **Pong!**\n⚡ `{elapsed:.2f}ms`")
-        logger.info(f"[{name}] .ping → {elapsed:.2f}ms")
+        
 
     # ─── .alive ──────────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.alive$", outgoing=True))
@@ -40,7 +40,7 @@ def register(client, name: str = "owner"):
             f"✅ **Status:** Online & Running"
         )
         await edit_or_send(event, text)
-        logger.info(f"[{name}] .alive triggered")
+        
 
     # ─── .help ───────────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.help$", outgoing=True))

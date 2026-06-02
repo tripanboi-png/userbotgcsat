@@ -75,7 +75,7 @@ class ClientManager:
             doc = await get_session_by_user_id(OWNER_ID)
             if doc:
                 session_string = doc["session"]
-                logger.info(f"[Main] Loaded owner session from database: {doc['name']}")
+                
             else:
                 logger.warning(
                     "[Main] OWNER_SESSION not set and no owner session in database. "
@@ -236,7 +236,7 @@ class ClientManager:
         reg_autogcast(self._owner_client, self, self._owner_name)
         reg_stats(self._owner_client, self._owner_name)
 
-        logger.info("[Main] All modules registered on owner client.")
+        
 
     # ── Disconnect all ────────────────────────────────────────────────────────
 
@@ -327,7 +327,7 @@ async def main():
     # 7. Restore autogcast tasks from DB
     from modules.autogcast import restore_autogcast_tasks
     restored = await restore_autogcast_tasks(manager)
-    logger.info(f"[Main] Restored {restored} autogcast task(s) from database.")
+    
 
     logger.info("═" * 50)
     logger.info("🚀 USERBOT ONLINE")
