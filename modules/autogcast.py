@@ -215,7 +215,7 @@ def register(client, client_manager, name: str = "owner"):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name=session_name, message=message, all_sessions=False)
+                session_name=session_name, message=message, all_sessions=False)
 
         await event.edit(
             f"✅ **Auto GCast Session AKTIF**\n\n"
