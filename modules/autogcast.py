@@ -165,7 +165,7 @@ def register(client, client_manager, name: str = "owner"):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name="__all__", message=message, all_sessions=True)
+                session_name="__all__", message=message, all_sessions=True)
 
         all_sessions = client_manager.get_all_clients()
         await event.edit(
