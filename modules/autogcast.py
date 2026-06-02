@@ -315,7 +315,7 @@ def register(client, client_manager, name: str = "owner"):
                 f"  🆔 `{t['task_id']}`"
             )
 
-        await event.edit("\n".join(lines)))
+        await event.edit("\n".join(lines))
 
 
 
