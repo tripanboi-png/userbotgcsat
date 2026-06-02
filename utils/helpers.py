@@ -74,7 +74,7 @@ async def get_target_groups(client) -> list:
         if is_group_or_supergroup(dialog):
             groups.append(dialog)
 
-    logger.info(f"[Helpers] Found {len(groups)} target groups out of {len(dialogs)} dialogs")
+    
     return groups
 
 
