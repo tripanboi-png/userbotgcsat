@@ -88,8 +88,14 @@ def register(client, client_manager, name: str = "owner"):
             f"⏱ **Durasi:** `{format_duration(duration)}`\n"
             f"🆔 **Task:** `{task_id}`"
         )
-        await event.edit(text)
-        logger.info(f"[GCast] Task {task_id}: {result['success']} ok, {result['fail']} fail")
+        await event.edit(
+            f"<blockquote>{text}</blockquote>",
+            parse_mode="html"
+        )
+
+        logger.info(
+            f"[GCast] Task {task_id}: {result['success']} ok, {result['fail']} fail"
+        )
 
     # ─── .gcastall ───────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcastall\s+([\s\S]+)$", outgoing=True))
