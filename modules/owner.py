@@ -60,37 +60,36 @@ def register(client, name: str = "owner"):
 ━━━━━━━━━━━━━━━━━━━━
 📱 **SESSION MANAGEMENT**
 ━━━━━━━━━━━━━━━━━━━━
-`.addsession <string>` — Add new session
-`.delsession <name>` — Remove a session
-`.sessions` — List all sessions
-
+`.addsession <string_session>` — Tambah akun baru
+`.delsession <nama_akun>` — Hapus akun
+`.sessions` — Lihat daftar akun aktif
 ━━━━━━━━━━━━━━━━━━━━
 📢 **BROADCAST**
 ━━━━━━━━━━━━━━━━━━━━
 `.gcast <msg>` — Broadcast (owner only)
-`.gcastall <msg>` — Broadcast all sessions
-`.gcastsession <name> <msg>` — Broadcast specific session
+`.gcastall <msg>` — Kirim pesan ke semua akun
+`.gcastsession <nama_akun> <pesan>` — Kirim pesan melalui akun tertentu
 
 ━━━━━━━━━━━━━━━━━━━━
 ⏰ **AUTO BROADCAST**
 ━━━━━━━━━━━━━━━━━━━━
-`.autogcast <min> <msg>` — Auto broadcast owner
-`.autogcastall <min> <msg>` — Auto broadcast all
-`.autogcastsession <name> <min> <msg>` — Auto specific
+`.autogcast <menit> <pesan>` — Broadcast otomatis akun utama
+`.autogcastall <menit> <pesan>` — Broadcast otomatis semua akun
+`.autogcastsession <nama_akun> <menit> <pesan>` — Broadcast otomatis akun tertentu
 
 ━━━━━━━━━━━━━━━━━━━━
 🛑 **STOP AUTO BROADCAST**
 ━━━━━━━━━━━━━━━━━━━━
-`.stopgcast` — Stop all autogcast
-`.stopgcastsession <name>` — Stop specific session
+`.stopgcast` — Hentikan semua auto broadcast
+`.stopgcastsession <nama_akun>` — Hentikan auto broadcast akun tertentu
 
 ━━━━━━━━━━━━━━━━━━━━
 📊 **STATUS & STATS**
 ━━━━━━━━━━━━━━━━━━━━
-`.gcaststatus` — Status owner autogcast
-`.gcaststatusall` — Status all sessions
+`.gcaststatus` — Status auto broadcast akun utama
+`.gcaststatusall` — Status semua akun
 `.gcaststats` — Broadcast statistics
-`.gcasterror` — Show recent errors
+`.gcasterror` — Lihat error terbaru
 """
         await edit_or_send(event, help_text.strip())
         logger.info(f"[{name}] .help triggered")
