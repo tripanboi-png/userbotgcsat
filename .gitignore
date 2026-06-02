@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables (NEVER commit!)
+.env
+
+# Telethon sessions (NEVER commit!)
+*.session
+*.session-journal
+sessions/*.session
+sessions/*.session-journal
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Heroku
+.heroku/
