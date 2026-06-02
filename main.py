@@ -357,7 +357,7 @@ async def main():
             pass  # Windows doesn't support add_signal_handler
 
     # 9. Run all clients
-    logger.info("[Main] Userbot is fully operational. Listening for commands...")
+    logger.info("[Main] Userbot sudah siap sepenuhnya dan sedang menunggu command.")
     await manager.run_until_disconnected()
 
     # 10. Cleanup on exit
