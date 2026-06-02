@@ -81,13 +81,14 @@ def register(client, client_manager, name: str = "owner"):
         duration = time.monotonic() - start_time
 
         text = (
-            f"📢 **GCAST SELESAI**\n\n"
-            f"👥 **Grup:** `{result['total']}`\n"
-            f"✅ **Berhasil:** `{result['success']}`\n"
-            f"❌ **Gagal:** `{result['fail']}`\n"
-            f"⏱ **Durasi:** `{format_duration(duration)}`\n"
-            f"🆔 **Task:** `{task_id}`"
+            f"📢 <b>GCAST SELESAI</b>\n\n"
+            f"👥 <b>Grup:</b> {result['total']}\n"
+            f"✅ <b>Berhasil:</b> {result['success']}\n"
+            f"❌ <b>Gagal:</b> {result['fail']}\n"
+            f"⏱ <b>Durasi:</b> {format_duration(duration)}\n"
+            f"🆔 <b>Task:</b> {task_id}"
         )
+
         await event.edit(
             f"<blockquote>{text}</blockquote>",
             parse_mode="html"
