@@ -94,9 +94,6 @@ def register(client, client_manager, name: str = "owner"):
             parse_mode="html"
         )
 
-        logger.info(
-            f"[GCast] Task {task_id}: {result['success']} ok, {result['fail']} fail"
-        )
 
     # ─── .gcastall ───────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcastall\s+([\s\S]+)$", outgoing=True))
@@ -151,10 +148,7 @@ def register(client, client_manager, name: str = "owner"):
             f"📊 **Per Session:**\n{session_summary}"
         )
         await event.edit(text)
-        logger.info(
-            f"[GCastAll] Task {task_id}: {total_success} ok, {total_fail} fail "
-            f"across {len(all_clients)} sessions"
-        )
+    
 
     # ─── .gcastsession ───────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcastsession\s+(\S+)\s+([\s\S]+)$", outgoing=True))
@@ -191,12 +185,9 @@ def register(client, client_manager, name: str = "owner"):
             f"🆔 **Task:** `{task_id}`"
         )
         await event.edit(text)
-        logger.info(
-            f"[GCastSession] Task {task_id} via {session_name}: "
-            f"{result['success']} ok, {result['fail']} fail"
-        )
+    
 
-    logger.info(f"[GCast] Commands registered for '{name}'")
+    
 
 
 # ─── Exported for autogcast use ───────────────────────────────────────────────

@@ -36,7 +36,6 @@ def register(client, name: str = "owner"):
             f"  ❌ Gagal: `{total['fail']}`"
         )
         await edit_or_send(event, text)
-        logger.info(f"[Stats] .gcaststats triggered by {event.sender_id}")
 
     # ─── .gcasterror ─────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcasterror$", outgoing=True))
@@ -61,6 +60,4 @@ def register(client, name: str = "owner"):
             )
 
         await edit_or_send(event, "\n".join(lines))
-        logger.info(f"[Stats] .gcasterror triggered by {event.sender_id}")
 
-    logger.info(f"[Stats] Commands registered for '{name}'")

@@ -40,7 +40,7 @@ async def save_autogcast(
         "updated_at": datetime.now(timezone.utc),
     }
     await col.insert_one(doc)
-    logger.info(f"[AutoGcast] Saved task {task_id} for session '{session_name}' every {interval_minutes}m")
+    
     return task_id
 
 

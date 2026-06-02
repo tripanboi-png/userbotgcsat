@@ -88,7 +88,6 @@ async def _auto_broadcast_job(task_id: str, session_name: str, message: str, all
         next_run = now + timedelta(minutes=interval)
         await update_run_times(task_id, now, next_run)
 
-    logger.info(f"[AutoGcast] Task {task_id} run completed for session '{session_name}'")
 
 
 def register(client, client_manager, name: str = "owner"):
@@ -133,7 +132,6 @@ def register(client, client_manager, name: str = "owner"):
             f"🆔 **Task ID:** `{task_id}`\n\n"
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
-        logger.info(f"[AutoGcast] Started task {task_id} every {interval}m for '{name}'")
 
     # ─── .autogcastall ───────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.autogcastall\s+(\d+)\s+([\s\S]+)$", outgoing=True))
@@ -175,7 +173,6 @@ def register(client, client_manager, name: str = "owner"):
             f"🆔 **Task ID:** `{task_id}`\n\n"
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
-        logger.info(f"[AutoGcast] Started ALL task {task_id} every {interval}m")
 
     # ─── .autogcastsession ───────────────────────────────────────────────────
     @client.on(events.NewMessage(
@@ -224,7 +221,6 @@ def register(client, client_manager, name: str = "owner"):
             f"🆔 **Task ID:** `{task_id}`\n\n"
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
-        logger.info(f"[AutoGcast] Started session task {task_id} every {interval}m for '{session_name}'")
 
     # ─── .stopgcast ──────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.stopgcast$", outgoing=True))
@@ -240,7 +236,6 @@ def register(client, client_manager, name: str = "owner"):
             f"🛑 **Semua Auto GCast dihentikan.**\n"
             f"📊 **Tasks dihentikan:** `{stopped}`"
         )
-        logger.info(f"[AutoGcast] Stopped all tasks ({stopped})")
 
     # ─── .stopgcastsession ───────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.stopgcastsession\s+(\S+)$", outgoing=True))
@@ -267,7 +262,6 @@ def register(client, client_manager, name: str = "owner"):
             await event.edit(
                 f"⚠️ **Tidak ada task aktif untuk session `{session_name}`.**"
             )
-        logger.info(f"[AutoGcast] Stopped tasks for '{session_name}' (removed={removed})")
 
     # ─── .gcaststatus ────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcaststatus$", outgoing=True))
@@ -321,10 +315,8 @@ def register(client, client_manager, name: str = "owner"):
                 f"  🆔 `{t['task_id']}`"
             )
 
-        await event.edit("\n".join(lines))
-        logger.info("[AutoGcast] .gcaststatusall triggered")
+        await event.edit("\n".join(lines)))
 
-    logger.info(f"[AutoGcast] Commands registered for '{name}'")
 
 
 async def restore_autogcast_tasks(client_manager):
@@ -353,7 +345,6 @@ async def restore_autogcast_tasks(client_manager):
                 session_name=session_name,
                 message=message, all_sessions=all_sessions)
         restored += 1
-        logger.info(f"[AutoGcast] Restored task {task_id} for '{session_name}' every {interval}m")
 
-    logger.info(f"[AutoGcast] Restored {restored} autogcast tasks from database.")
+    
     return restored

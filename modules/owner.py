@@ -92,6 +92,4 @@ def register(client, name: str = "owner"):
 `.gcasterror` — Lihat error terbaru
 """
         await edit_or_send(event, help_text.strip())
-        logger.info(f"[{name}] .help triggered")
 
-    logger.info(f"[Owner] Commands registered for session '{name}'")
