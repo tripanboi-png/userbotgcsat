@@ -350,7 +350,7 @@ async def restore_autogcast_tasks(client_manager):
         }
 
         add_job(task_id, _auto_broadcast_job, interval,
-                task_id=task_id, session_name=session_name,
+                session_name=session_name,
                 message=message, all_sessions=all_sessions)
         restored += 1
         logger.info(f"[AutoGcast] Restored task {task_id} for '{session_name}' every {interval}m")
