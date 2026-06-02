@@ -77,28 +77,21 @@ def register(client, client_manager, name: str = "owner"):
         )
 
         start_time = time.monotonic()
-result = await _broadcast_with_client(client, name, message, task_id)
-duration = time.monotonic() - start_time
+        result = await _broadcast_with_client(client, name, message, task_id)
+        duration = time.monotonic() - start_time
 
-text = (
-    f"📢 GCAST SELESAI\n\n"
-    f"👥 Grup: {result['total']}\n"
-    f"✅ Berhasil: {result['success']}\n"
-    f"❌ Gagal: {result['fail']}\n"
-    f"⏱ Durasi: {format_duration(duration)}\n"
-    f"🆔 Task: {task_id}"
-)
+        text = (
+            f"📢 **GCAST SELESAI**\n\n"
+            f"👥 **Grup:** `{result['total']}`\n"
+            f"✅ **Berhasil:** `{result['success']}`\n"
+            f"❌ **Gagal:** `{result['fail']}`\n"
+            f"⏱ **Durasi:** `{format_duration(duration)}`\n"
+            f"🆔 **Task:** `{task_id}`"
+        )
+        await event.edit(text)
+        logger.info(f"[GCast] Task {task_id}: {result['success']} ok, {result['fail']} fail")
 
-await event.edit(
-    f"<blockquote>{text}</blockquote>",
-    parse_mode="html"
-)
-
-logger.info(
-    f"[Gcast] Task {task_id}: {result['success']} ok, {result['fail']} fail"
-)
-
-    # ─── .gcastall ────────────────────────────────────────────────────
+    # ─── .gcastall ───────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.gcastall\s+([\s\S]+)$", outgoing=True))
     async def gcastall_handler(event):
         if event.sender_id != OWNER_ID:
