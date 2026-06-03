@@ -49,8 +49,7 @@ def register(client, name: str = "owner"):
             f"📦 **Session:** `{name}`\n"
             f"✅ **Status:** Online & Running"
         )
-        msg = await edit_or_send(event, text)
-        await auto_delete(msg, 10)
+        msg = None
 
         
 
