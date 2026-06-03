@@ -104,8 +104,8 @@ def register(client, name: str = "owner"):
 
         LAST_HELP_MESSAGE = await event.respond(help_text.strip())
 
-    try:
-             await event.delete()
-         except:
-             pass
+        try:
+            await event.delete()
+        except:
+            pass
 
