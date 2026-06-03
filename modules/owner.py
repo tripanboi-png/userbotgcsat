@@ -10,6 +10,8 @@ from config import OWNER_ID
 from utils.logger import logger
 from utils.helpers import edit_or_send
 
+LAST_HELP_MESSAGE = None
+
 
 def register(client, name: str = "owner"):
     """Register owner commands on a Telethon client."""
@@ -45,6 +47,8 @@ def register(client, name: str = "owner"):
     # ─── .help ───────────────────────────────────────────────────────────────
     @client.on(events.NewMessage(pattern=r"^\.help$", outgoing=True))
     async def help_handler(event):
+        global LAST_HELP_MESSAGE
+
         if event.sender_id != OWNER_ID:
             return
         help_text = """
@@ -91,5 +95,17 @@ def register(client, name: str = "owner"):
 `.gcaststats` — Broadcast statistics
 `.gcasterror` — Lihat error terbaru
 """
-        await edit_or_send(event, help_text.strip())
+
+    if LAST_HELP_MESSAGE:
+       try:
+           await LAST_HELP_MESSAGE.delete()
+       except:
+           pass
+
+   LAST_HELP_MESSAGE = await event.respond(help_text.strip())
+
+   try:
+       await event.delete()
+   except:
+      pass
 
