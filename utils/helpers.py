@@ -114,3 +114,12 @@ async def edit_or_send(event, text: str):
         await event.edit(text)
     except Exception:
         await event.respond(text)
+
+
+async def auto_delete(message, seconds=5):
+    """Auto delete a message after X seconds."""
+    try:
+        await asyncio.sleep(seconds)
+        await message.delete()
+    except:
+        pass

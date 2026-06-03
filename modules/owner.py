@@ -8,7 +8,7 @@ import asyncio
 from telethon import events
 from config import OWNER_ID
 from utils.logger import logger
-from utils.helpers import edit_or_send
+from utils.helpers import edit_or_send, auto_delete
 
 LAST_HELP_MESSAGE = None
 
@@ -21,10 +21,15 @@ def register(client, name: str = "owner"):
     async def ping_handler(event):
         if event.sender_id != OWNER_ID:
             return
+
         start = time.monotonic()
-        msg = await event.edit("🏓 Pong!")
+        await event.edit("🏓 Pong!")
         elapsed = (time.monotonic() - start) * 1000
+
+
         await event.edit(f"🏓 **Pong!**\n⚡ `{elapsed:.2f}ms`")
+
+        await auto_delete(event, 5)
         
 
     # ─── .alive ──────────────────────────────────────────────────────────────
