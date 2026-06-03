@@ -111,7 +111,7 @@ def parse_command_with_text(text: str, prefix: str = ".") -> tuple[str, str]:
 async def edit_or_send(event, text: str):
     """Edit the current message, or send a new one if edit fails."""
     try:
-        await event.edit(text)
+        return await event.edit(text)
     except Exception:
         await event.respond(text)
 
