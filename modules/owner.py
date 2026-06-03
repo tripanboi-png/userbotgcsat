@@ -96,16 +96,16 @@ def register(client, name: str = "owner"):
 `.gcasterror` — Lihat error terbaru
 """
 
-    if LAST_HELP_MESSAGE:
-       try:
-           await LAST_HELP_MESSAGE.delete()
-       except:
-           pass
+        if LAST_HELP_MESSAGE:
+            try:
+                await LAST_HELP_MESSAGE.delete()
+            except:
+                pass
 
-   LAST_HELP_MESSAGE = await event.respond(help_text.strip())
+        LAST_HELP_MESSAGE = await event.respond(help_text.strip())
 
-   try:
-       await event.delete()
-   except:
-      pass
+         try:
+             await event.delete()
+         except:
+             pass
 
