@@ -114,17 +114,14 @@ class ClientManager:
 
             me = await client.get_me()
             if me.id != OWNER_ID:
-                logger.critical(
+                logger.warning(
                     f"[Main] OWNER_SESSION belongs to user {me.id}, "
-                    f"but OWNER_ID is {OWNER_ID}. Refusing to start."
+                    f"but OWNER_ID is {OWNER_ID}. Proceeding anyway."
                 )
-                await client.disconnect()
-                return None
 
             self._owner_name = me.first_name or "owner"
             key = self._normalize(self._owner_name)
             self._clients[key] = client
-            self._client_user_ids[me.id] = key
             self._owner_client = client
 
             # Save/update in database
@@ -147,13 +144,8 @@ class ClientManager:
             logger.error("[Main] Owner session: Account is banned.")
         except AuthKeyDuplicatedError:
             logger.error("[Main] Owner session: AuthKeyDuplicated.")
-        except SessionExpiredError:
-            logger.error("[Main] Owner session: SessionExpired.")
         except Exception as e:
             logger.error(f"[Main] Owner session error: {e}")
-
-        if "client" in locals() and client.is_connected():
-            await client.disconnect()
 
         return None
 
@@ -198,16 +190,7 @@ class ClientManager:
                 return False
 
             me = await client.get_me()
-            if me.id in self._client_user_ids:
-                logger.info(
-                    f"[ClientManager] Account ID={me.id} already running as "
-                    f"'{self._client_user_ids[me.id]}', skipping '{name}'."
-                )
-                await client.disconnect()
-                return True
-
             self._clients[key] = client
-            self._client_user_ids[me.id] = key
             logger.info(f"[ClientManager] Started session '{name}' (ID={me.id})")
             return True
 
@@ -217,13 +200,8 @@ class ClientManager:
             logger.error(f"[ClientManager] '{name}': Account is banned.")
         except AuthKeyDuplicatedError:
             logger.error(f"[ClientManager] '{name}': AuthKeyDuplicated.")
-        except SessionExpiredError:
-            logger.error(f"[ClientManager] '{name}': SessionExpired.")
         except Exception as e:
             logger.error(f"[ClientManager] '{name}': Error starting session: {e}")
-
-        if "client" in locals() and client.is_connected():
-            await client.disconnect()
 
         return False
 
@@ -233,8 +211,6 @@ class ClientManager:
         client = self._clients.pop(key, None)
         if client:
             try:
-                me = await client.get_me()
-                self._client_user_ids.pop(me.id, None)
                 await client.disconnect()
             except Exception as e:
                 logger.warning(f"[ClientManager] Error disconnecting '{name}': {e}")
@@ -287,14 +263,11 @@ class ClientManager:
         """Gracefully disconnect all active clients."""
         for name, client in list(self._clients.items()):
             try:
-                me = await client.get_me()
-                self._client_user_ids.pop(me.id, None)
                 await client.disconnect()
                 logger.info(f"[ClientManager] Disconnected '{name}'")
             except Exception as e:
                 logger.warning(f"[ClientManager] Error disconnecting '{name}': {e}")
         self._clients.clear()
-        self._client_user_ids.clear()
 
     # ── Run all clients ──────────────────────────────────────────────────────
 
