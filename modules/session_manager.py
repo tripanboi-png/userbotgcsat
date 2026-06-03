@@ -1,6 +1,14 @@
 """
-Session management module.
-Commands: .addsession, .delsession, .sessions
+╭──────────────────────────────╮
+│      SESSION MODULE          │
+╰──────────────────────────────╯
+
+Commands:
+• .addsession
+• .delsession
+• .sessions
+
+Developed by Tripan
 """
 
 import asyncio

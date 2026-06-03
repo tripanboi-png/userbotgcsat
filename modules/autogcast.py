@@ -1,8 +1,16 @@
 """
-Auto broadcast module.
-Commands: .autogcast, .autogcastall, .autogcastsession,
-          .stopgcast, .stopgcastsession,
-          .gcaststatus, .gcaststatusall
+╭──────────────────────────────╮
+│      AUTOGCAST MODULE        │
+╰──────────────────────────────╯
+
+Commands:
+• .autogcast
+• .autogcastall
+• .autogcastsession
+• .stopgcast
+• .stopgcastsession
+
+Developed by Tripan
 """
 
 import asyncio
@@ -93,7 +101,9 @@ async def _auto_broadcast_job(task_id: str, session_name: str, message: str, all
 def register(client, client_manager, name: str = "owner"):
     """Register autogcast commands on the owner client."""
 
-    # ─── .autogcast ──────────────────────────────────────────────────────────
+    # =============================================================================
+    # AUTOGCAST COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.autogcast\s+(\d+)\s+([\s\S]+)$", outgoing=True))
     async def autogcast_handler(event):
         if event.sender_id != OWNER_ID:
@@ -133,7 +143,9 @@ def register(client, client_manager, name: str = "owner"):
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
 
-    # ─── .autogcastall ───────────────────────────────────────────────────────
+    # =============================================================================
+    # AUTOGCAST ALL COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.autogcastall\s+(\d+)\s+([\s\S]+)$", outgoing=True))
     async def autogcastall_handler(event):
         if event.sender_id != OWNER_ID:
@@ -174,7 +186,9 @@ def register(client, client_manager, name: str = "owner"):
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
 
-    # ─── .autogcastsession ───────────────────────────────────────────────────
+    # =============================================================================
+    # AUTOGCAST SESSION COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(
         pattern=r"^\.autogcastsession\s+(\S+)\s+(\d+)\s+([\s\S]+)$", outgoing=True
     ))
@@ -222,7 +236,9 @@ def register(client, client_manager, name: str = "owner"):
             f"💬 **Pesan:**\n{message[:100]}{'...' if len(message) > 100 else ''}"
         )
 
-    # ─── .stopgcast ──────────────────────────────────────────────────────────
+    # =============================================================================
+    # STOP GCAST COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.stopgcast$", outgoing=True))
     async def stopgcast_handler(event):
         if event.sender_id != OWNER_ID:
@@ -237,7 +253,9 @@ def register(client, client_manager, name: str = "owner"):
             f"📊 **Tasks dihentikan:** `{stopped}`"
         )
 
-    # ─── .stopgcastsession ───────────────────────────────────────────────────
+    # =============================================================================
+    # STOP GCAST SESSION COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.stopgcastsession\s+(\S+)$", outgoing=True))
     async def stopgcastsession_handler(event):
         if event.sender_id != OWNER_ID:
@@ -263,7 +281,9 @@ def register(client, client_manager, name: str = "owner"):
                 f"⚠️ **Tidak ada task aktif untuk session `{session_name}`.**"
             )
 
-    # ─── .gcaststatus ────────────────────────────────────────────────────────
+    # =============================================================================
+    # GCAST STATUS COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.gcaststatus$", outgoing=True))
     async def gcaststatus_handler(event):
         if event.sender_id != OWNER_ID:
@@ -294,7 +314,9 @@ def register(client, client_manager, name: str = "owner"):
         )
         await event.edit(text)
 
-    # ─── .gcaststatusall ─────────────────────────────────────────────────────
+    # =============================================================================
+    # GCAST STATUS ALL COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.gcaststatusall$", outgoing=True))
     async def gcaststatusall_handler(event):
         if event.sender_id != OWNER_ID:

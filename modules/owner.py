@@ -1,6 +1,15 @@
 """
-Owner module: .ping, .alive, .help commands.
-Only the OWNER_ID can trigger these.
+╭──────────────────────────────╮
+│        OWNER MODULE          │
+╰──────────────────────────────╯
+
+Commands:
+• .ping
+• .alive
+• .help
+• .restart
+
+Developed by Tripan
 """
 
 import time
@@ -19,7 +28,9 @@ LAST_HELP_MESSAGE = None
 def register(client, name: str = "owner"):
     """Register owner commands on a Telethon client."""
 
-    # ─── .ping ───────────────────────────────────────────────────────────────
+    # =============================================================================
+    # PING COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.ping$", outgoing=True))
     async def ping_handler(event):
         if event.sender_id != OWNER_ID:
@@ -35,7 +46,9 @@ def register(client, name: str = "owner"):
         await auto_delete(event, 5)
         
 
-    # ─── .alive ──────────────────────────────────────────────────────────────
+    # =============================================================================
+    # ALIVE COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.alive$", outgoing=True))
     async def alive_handler(event):
         if event.sender_id != OWNER_ID:
@@ -52,8 +65,9 @@ def register(client, name: str = "owner"):
         msg = await edit_or_send(event, text)
         await auto_delete(msg, 10)
         
-
-    # .restart
+    # =============================================================================
+    # RESTART COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.restart$", outgoing=True))
     async def restart_handler(event):
         if event.sender_id != OWNER_ID:
@@ -66,7 +80,9 @@ def register(client, name: str = "owner"):
 
         
 
-    # ─── .help ───────────────────────────────────────────────────────────────
+    # =============================================================================
+    # HELP COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.help$", outgoing=True))
     async def help_handler(event):
         global LAST_HELP_MESSAGE

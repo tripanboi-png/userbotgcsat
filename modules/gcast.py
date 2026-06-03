@@ -1,6 +1,14 @@
-"""
-Global broadcast module.
-Commands: .gcast, .gcastall, .gcastsession
+""""
+╭──────────────────────────────╮
+│      BROADCAST MODULE        │
+╰──────────────────────────────╯
+
+Commands:
+• .gcast
+• .gcastall
+• .gcastsession
+
+Developed by Tripan
 """
 
 import asyncio
@@ -61,7 +69,9 @@ async def _broadcast_with_client(
 def register(client, client_manager, name: str = "owner"):
     """Register gcast commands on the owner client."""
 
-    # ─── .gcast ──────────────────────────────────────────────────────────────
+    # =============================================================================
+    # GCAST COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.gcast\s+([\s\S]+)$", outgoing=True))
     async def gcast_handler(event):
         if event.sender_id != OWNER_ID:
@@ -95,7 +105,9 @@ def register(client, client_manager, name: str = "owner"):
         )
 
 
-    # ─── .gcastall ───────────────────────────────────────────────────────────
+    # =============================================================================
+    # GCAST ALL COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.gcastall\s+([\s\S]+)$", outgoing=True))
     async def gcastall_handler(event):
         if event.sender_id != OWNER_ID:
@@ -150,7 +162,9 @@ def register(client, client_manager, name: str = "owner"):
         await event.edit(text)
     
 
-    # ─── .gcastsession ───────────────────────────────────────────────────────
+    # =============================================================================
+    # GCAST SESSION COMMAND
+    # =============================================================================
     @client.on(events.NewMessage(pattern=r"^\.gcastsession\s+(\S+)\s+([\s\S]+)$", outgoing=True))
     async def gcastsession_handler(event):
         if event.sender_id != OWNER_ID:

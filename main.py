@@ -1,9 +1,27 @@
 """
-Telegram Userbot Full Management System
-Main entry point — manages all Telethon clients, loads sessions from MongoDB,
-registers all modules, starts APScheduler, and runs forever.
+╔══════════════════════════════════════╗
+║       TELEGRAM USERBOT SYSTEM        ║
+╚══════════════════════════════════════╝
 
-Deploy: Heroku Worker Dyno
+Aplikasi Utama
+
+Fungsi:
+• Inisialisasi Client Owner
+• Memuat Semua Session Tersimpan
+• Mengelola Multi Session
+• Mendaftarkan Semua Module
+• Memulihkan AutoGCast
+• Menjalankan APScheduler
+• Menangani Shutdown Aplikasi
+
+Teknologi:
+• Python 3.12
+• Telethon
+• APScheduler
+• MongoDB
+• Heroku Worker
+
+Dikembangkan oleh Tripan
 """
 
 import asyncio
