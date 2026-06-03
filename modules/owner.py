@@ -49,7 +49,10 @@ def register(client, name: str = "owner"):
             f"📦 **Session:** `{name}`\n"
             f"✅ **Status:** Online & Running"
         )
-        await edit_or_send(event, text)
+        msg = await edit_or_send(event, text)
+        await auto_delete(msg, 10)
+
+        
 
     # .restart
     @client.on(events.NewMessage(pattern=r"^\.restart$", outgoing=True))
