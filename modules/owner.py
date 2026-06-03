@@ -5,6 +5,9 @@ Only the OWNER_ID can trigger these.
 
 import time
 import asyncio
+import os
+
+
 from telethon import events
 from config import OWNER_ID
 from utils.logger import logger
@@ -47,6 +50,18 @@ def register(client, name: str = "owner"):
             f"✅ **Status:** Online & Running"
         )
         await edit_or_send(event, text)
+
+    # .restart
+    @client.on(events.NewMessage(pattern=r"^\.restart$", outgoing=True))
+    async def restart_handler(event):
+        if event.sender_id != OWNER_ID:
+            return
+
+        await event.edit("♻️ Restarting Userbot...")
+        os._exit(0)
+
+
+
         
 
     # ─── .help ───────────────────────────────────────────────────────────────
@@ -65,6 +80,7 @@ def register(client, name: str = "owner"):
 `.ping` — Check latency
 `.alive` — Check bot status
 `.help` — Show this help
+`.restart` — 🔄 Restart userbot
 
 ━━━━━━━━━━━━━━━━━━━━
 📱 **SESSION MANAGEMENT**
